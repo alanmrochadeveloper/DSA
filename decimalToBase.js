@@ -37,28 +37,18 @@ function decimalToBase(decimal = 0, base = 2) {
 
 }
 
-const resultFor1 = decimalToBase(1)
-const resultFor2 = decimalToBase(2)
-const resultFor3 = decimalToBase(3)
-const resultFor10 = decimalToBase(10)
-const resultFor12 = decimalToBase(12)
-const resultFor18 = decimalToBase(18)
-const resultFor64 = decimalToBase(64)
-const resultFor128 = decimalToBase(128)
-const resultFor255 = decimalToBase(255, 16)
-const resultFor256 = decimalToBase(256, 16)
 
 console.log({
-  resultFor1,
-  resultFor2,
-  resultFor3,
-  resultFor10,
-  resultFor12,
-  resultFor18,
-  resultFor64,
-  resultFor128,
-  resultFor255,
-  resultFor256,
+  resultFor1: decimalToBase(1),
+  resultFor2: decimalToBase(2),
+  resultFor3: decimalToBase(3),
+  resultFor10: decimalToBase(10),
+  resultFor12: decimalToBase(12),
+  resultFor18: decimalToBase(18),
+  resultFor64: decimalToBase(64),
+  resultFor128: decimalToBase(128),
+  resultFor255: decimalToBase(255, 16),
+  resultFor256: decimalToBase(256, 16),
   resultFor16: decimalToBase(15, 16),
   resultFor4096: decimalToBase(4096),
   resultFor39: decimalToBase(39),
