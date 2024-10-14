@@ -70,7 +70,44 @@ class LinkedList {
   }
 
   shift() {
+    if (!this.head) return undefined;
+    const temp = this.head;
+    if (this.head === this.tail) {
+      this.head = null;
+      this.tail = null;
+      return temp
+    }
+    this.head = this.head.next;
+    return temp;
+  }
 
+  delete(position) {
+    if (!this.size()) return undefined
+    let temp = this.head;
+    if (this.head === this.tail && position === 1) {
+      this.head = null
+      this.tail = null
+      return temp;
+    }
+    if (position === 1) {
+      this.head = this.head.next;
+      return temp;
+    }
+    let counter = 2;
+    let previous = this.head;
+    let current = this.head.next;
+    while (current != null && counter <= position) {
+      if (position === counter) {
+        temp = current;
+        current = current.next;
+        previous.next = current;
+        return temp
+      };
+      previous = current;
+      current = current.next
+      counter++
+    }
+    return temp;
   }
 
   toString(callback = null) {
@@ -81,8 +118,8 @@ class LinkedList {
     return callback ? callback() : `${JSON.stringify(this)}`
   }
   listToString() {
+    if (this.head == null) return console.log(`\n0 HEAD {value: null, next: null}\n0 TAIL {value: null, next: null}\n`)
     const regex = new RegExp(/(?<=\bnext":\{)\".*/)
-    regex.test()
     let current = this.head;
     let counter = 1;
     while (current != null) {
@@ -91,6 +128,7 @@ class LinkedList {
       current = current.next
       counter++
     }
+    console.log("\n")
   }
 }
 
@@ -108,9 +146,11 @@ linkedList.prepend(12)
 
 linkedList.listToString()
 linkedList.pop()
-console.log("after 1 pop", linkedList.size())
+console.log("after 1 pop")
 linkedList.listToString()
-linkedList.pop()
-linkedList.pop()
-console.log("after 2 pops", linkedList.size())
+linkedList.shift()
+console.log("after 1 shift")
+linkedList.listToString()
+linkedList.delete(2);
+console.log("after 1 delete in 2nd position")
 linkedList.listToString()
