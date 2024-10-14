@@ -1,4 +1,4 @@
-// not complete yet, missing the delete, and insert, to be implemented
+// not complete yet, missing the insert, to be implemented
 class LinkedListNode {
   constructor(value, next = null) {
     this.value = value;
@@ -18,6 +18,7 @@ class LinkedList {
     return this.length;
   }
 
+  // INFO: could be named unshift
   prepend(value) {
     const newNode = new LinkedListNode(value)
     if (this.head == null && this.tail == null) {
@@ -132,25 +133,34 @@ class LinkedList {
   }
 }
 
-const linkedList = new LinkedList(-1)
+const linkedList = new LinkedList(1)
 
-linkedList.prepend(1)
+for (let i = 2; i < 11; i++) {
+  linkedList.append(i);
+}
+
+linkedList.listToString()
+
+linkedList.pop()
+
+console.log("after 1 pop")
+
+linkedList.listToString()
+
+linkedList.delete(5)
+
+console.log("after delete at position 5")
+
+linkedList.listToString()
 
 linkedList.prepend(0)
-
-linkedList.append(10)
-
-linkedList.append(11)
-
-linkedList.prepend(12)
+console.log("after 1 prepend with the value 0")
 
 linkedList.listToString()
-linkedList.pop()
-console.log("after 1 pop")
-linkedList.listToString()
+
 linkedList.shift()
+
 console.log("after 1 shift")
+
 linkedList.listToString()
-linkedList.delete(2);
-console.log("after 1 delete in 2nd position")
-linkedList.listToString()
+
