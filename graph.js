@@ -3,6 +3,10 @@ class Graph {
     this.adjacencyList = {}
   }
 
+  clearList() {
+    this.adjacencyList = {}
+  }
+
   addVertex(vertex) {
     if (this.adjacencyList[vertex]) return false;
     this.adjacencyList[vertex] = [];
@@ -30,9 +34,9 @@ class Graph {
 
   removeVertex(vertex) {
     if (!this.adjacencyList[vertex]) return false;
-    for (let i = 0; i < this.adjacencyList[vertex].length; i++) {
-      const relatedVertexKey = this.adjacencyList[vertex][i];
-      this.adjacencyList[relatedVertexKey] = this.adjacencyList[relatedVertexKey].filter(relatedVertex => relatedVertex !== vertex)
+    while (this.adjacencyList[vertex].length) {
+      const relatedVertex = this.adjacencyList[vertex].pop()
+      this.removeEdge(vertex, relatedVertex)
     }
     delete this.adjacencyList[vertex];
     return true;
@@ -70,4 +74,12 @@ console.log({ graph: JSON.stringify(graph) })
 console.log("adding a and d edge", graph.addEdge("a", "d"))
 console.log({ graph: JSON.stringify(graph) })
 console.log("removing the edge between c and d", graph.removeEdge("c", "d"))
+console.log({ graph: JSON.stringify(graph) })
+console.log("clearing the list", graph.clearList())
+console.log({ graph: JSON.stringify(graph) })
+console.log("adding a,b,c,d vertices", graph.addVertex("a"), graph.addVertex("b"), graph.addVertex("c"), graph.addVertex("d"))
+console.log({ graph: JSON.stringify(graph) })
+console.log("adding edges to the vertices", graph.addEdge("a", "b"), graph.addEdge("a", "c"), graph.addEdge("a", "d"), graph.addEdge("b", "d"), graph.addEdge("c", "d"))
+console.log({ graph: JSON.stringify(graph) })
+console.log("removing the d vertex", graph.removeVertex("d"))
 console.log({ graph: JSON.stringify(graph) })
