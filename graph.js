@@ -31,7 +31,8 @@ class Graph {
   removeVertex(vertex) {
     if (!this.adjacencyList[vertex]) return false;
     for (let i = 0; i < this.adjacencyList[vertex].length; i++) {
-      this.adjacencyList[this.adjacencyList[vertex][i]] = this.adjacencyList[this.adjacencyList[vertex][i]].filter(relatedVertex => relatedVertex !== vertex)
+      const relatedVertexKey = this.adjacencyList[vertex][i];
+      this.adjacencyList[relatedVertexKey] = this.adjacencyList[relatedVertexKey].filter(relatedVertex => relatedVertex !== vertex)
     }
     delete this.adjacencyList[vertex];
     return true;
