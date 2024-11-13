@@ -111,6 +111,47 @@ class LinkedList {
     return temp;
   }
 
+  getNode(position) {
+    if (!this.size()) return undefined
+    if (this.head === this.tail && position === 1) {
+      return this.head;
+    }
+    let counter = 2;
+    let previous = this.head;
+    let current = this.head.next;
+    while (current != null && counter <= position) {
+      if (position === counter) {
+        return current;
+      };
+      previous = current;
+      current = current.next
+      counter++
+    }
+    return undefined
+  }
+
+  getMiddleNode() {
+    if (!this.size()) return undefined;
+    if (this.size() === 1) return this.head;
+    const isEven = this.size() % 2 === 0;
+    const position = Math.ceil(this.size() / 2) + (isEven ? 1 : 0);
+    const middleNode = this.getNode(position);
+    return middleNode;
+  }
+
+  getMiddleNodeV2() {
+    if (!this.head) return null;
+    let current = this.head;
+    let counter = 1;
+    let middleNode = current;
+    while (current) {
+      current = current.next;
+      if (counter % 2 === 0) middleNode = middleNode.next;
+      counter++;
+    }
+    return middleNode;
+  }
+
   toString(callback = null) {
     return callback ? callback() : `${this}`
   }
@@ -139,13 +180,20 @@ for (let i = 2; i < 11; i++) {
   linkedList.append(i);
 }
 
+
 linkedList.listToString()
+
+console.log("getMiddleNode = ", linkedList.getMiddleNode())
+console.log("findMiddleNode = ", linkedList.getMiddleNodeV2())
 
 linkedList.pop()
 
 console.log("after 1 pop")
 
 linkedList.listToString()
+
+console.log("getMiddleNode = ", linkedList.getMiddleNode())
+console.log("findMiddleNode = ", linkedList.getMiddleNodeV2())
 
 linkedList.delete(5)
 
