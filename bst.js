@@ -38,6 +38,20 @@ class BST {
     }
   }
 
+  contains(value) {
+    if (this.root == null) return false;
+    let temp = this.root;
+    while (temp) {
+      if (temp.value === value) return true;
+      if (value > temp.value) {
+        temp = temp.right;
+      } else {
+        temp = temp.left;
+      }
+    }
+    return false;
+  }
+
   log(msg = "bst: ") {
     console.log(msg, JSON.stringify(this.root, undefined, 2));
   }
@@ -49,4 +63,8 @@ bst.insert(1);
 bst.insert(99);
 bst.insert(9);
 bst.insert(90);
+const contains2 = bst.contains(2);
+const contains90 = bst.contains(90);
+const contains1 = bst.contains(1);
+console.log({ contains2, contains90, contains1 });
 bst.log();
