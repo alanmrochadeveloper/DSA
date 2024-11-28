@@ -17,20 +17,20 @@ class BST {
     let temp = this.root;
     if (!this.root) {
       this.root = newNode;
-      return temp;
+      return this;
     }
     while (temp != null) {
       if (newNode.value > temp.value) {
         if (temp.right == null) {
           temp.right = newNode;
-          return newNode;
+          return this;
         }
         temp = temp.right;
       }
       if (newNode.value < temp.value) {
         if (temp.left == null) {
           temp.left = newNode;
-          return newNode;
+          return this;
         }
         temp = temp.left;
       }
