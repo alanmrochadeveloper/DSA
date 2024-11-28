@@ -52,6 +52,13 @@ class BST {
     return false;
   }
 
+  rContains (value, node = this.root) {
+    if(node === null) return false;
+    if(value === node.value) return true;
+    if(value < node.value ) return this.rContains(value, node.left);
+    if(value > node.value ) return this.rContains(value, node.right);
+  }
+
   log(msg = "bst: ") {
     console.log(msg, JSON.stringify(this.root, undefined, 2));
   }
@@ -66,5 +73,10 @@ bst.insert(90);
 const contains2 = bst.contains(2);
 const contains90 = bst.contains(90);
 const contains1 = bst.contains(1);
+
+const rContains2 = bst.contains(2);
+const rContains90 = bst.contains(90);
+const rContains1 = bst.contains(1);
 console.log({ contains2, contains90, contains1 });
+console.log({ rContains2, rContains90, rContains1 });
 bst.log();
