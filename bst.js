@@ -52,11 +52,30 @@ class BST {
     return false;
   }
 
-  rContains (value, node = this.root) {
-    if(node === null) return false;
-    if(value === node.value) return true;
-    if(value < node.value ) return this.rContains(value, node.left);
-    if(value > node.value ) return this.rContains(value, node.right);
+  rContains(value, node = this.root) {
+    if (node === null) return false;
+    if (value === node.value) return true;
+    if (value < node.value) return this.rContains(value, node.left);
+    if (value > node.value) return this.rContains(value, node.right);
+  }
+
+  #rInsert(value, currentNode = this.root) {
+    if (currentNode == null) return new BstNode(value);
+    if (value < currentNode.value) {
+      currentNode.left = this.#rInsert(value, currentNode.left);
+    } else if (value > currentNode.value) {
+      currentNode.right = this.#rInsert(value, currentNode.right);
+    }
+    return currentNode;
+  }
+
+  rInsert(value) {
+    if (this.root == null) this.root = new BstNode(value);
+    this.#rInsert(value);
+  }
+
+  clear() {
+    this.root = null;
   }
 
   log(msg = "bst: ") {
@@ -77,6 +96,17 @@ const contains1 = bst.contains(1);
 const rContains2 = bst.contains(2);
 const rContains90 = bst.contains(90);
 const rContains1 = bst.contains(1);
+
 console.log({ contains2, contains90, contains1 });
 console.log({ rContains2, rContains90, rContains1 });
 bst.log();
+bst.clear();
+bst.log("after clearing");
+
+bst.rInsert(2);
+bst.rInsert(1);
+bst.rInsert(3);
+bst.log("after inserting 2, 1, 3");
+console.log("\nRoot: " + bst.root.value);
+console.log("\nRoot->Left: " + bst.root.left.value);
+console.log("\nRoot->Right: " + bst.root.right.value);
