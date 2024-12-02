@@ -88,6 +88,8 @@ class BST {
         currentNode = currentNode.right;
       } else if(currentNode.right === null) {
         currentNode = currentNode.left;
+      } else {
+
       }
     }
     return currentNode;
@@ -95,6 +97,13 @@ class BST {
   
   deleteNode(value) {
     this.root = this.#deleteNode(value, this.root);
+  }
+
+  minValue(currentNode) {
+    while(currentNode.left  != null) {
+      currentNode  = currentNode.left;
+    }
+    return currentNode.value;
   }
 
   clear() {
@@ -112,6 +121,7 @@ bst.insert(1);
 bst.insert(99);
 bst.insert(9);
 bst.insert(90);
+console.log("min value",bst.minValue(bst.root));
 const contains2 = bst.contains(2);
 const contains90 = bst.contains(90);
 const contains1 = bst.contains(1);
