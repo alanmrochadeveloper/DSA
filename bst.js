@@ -76,32 +76,34 @@ class BST {
 
   #deleteNode(value, currentNode) {
     if (currentNode === null) return null;
-    
+
     if (value < currentNode.value) {
       currentNode.left = this.#deleteNode(value, currentNode.left);
     } else if (value > currentNode.value) {
       currentNode.right = this.#deleteNode(value, currentNode.right);
     } else {
-      if(currentNode.left == null && currentNode.right == null) {
+      if (currentNode.left == null && currentNode.right == null) {
         return null;
-      } else if(currentNode.left === null) {
+      } else if (currentNode.left === null) {
         currentNode = currentNode.right;
-      } else if(currentNode.right === null) {
+      } else if (currentNode.right === null) {
         currentNode = currentNode.left;
       } else {
-
+        const minValue = this.minValue(currentNode.right);
+        currentNode.value = minValue;
+        currentNode.right = this.#deleteNode(minValue, currentNode.right);
       }
     }
     return currentNode;
   }
-  
+
   deleteNode(value) {
     this.root = this.#deleteNode(value, this.root);
   }
 
   minValue(currentNode) {
-    while(currentNode.left  != null) {
-      currentNode  = currentNode.left;
+    while (currentNode.left != null) {
+      currentNode = currentNode.left;
     }
     return currentNode.value;
   }
@@ -121,7 +123,7 @@ bst.insert(1);
 bst.insert(99);
 bst.insert(9);
 bst.insert(90);
-console.log("min value",bst.minValue(bst.root));
+console.log("min value", bst.minValue(bst.root));
 const contains2 = bst.contains(2);
 const contains90 = bst.contains(90);
 const contains1 = bst.contains(1);
@@ -136,10 +138,19 @@ bst.log();
 bst.clear();
 bst.log("after clearing");
 
-bst.rInsert(2);
-bst.rInsert(1);
-bst.rInsert(3);
-bst.log("after inserting 2, 1, 3");
+bst.rInsert(20);
+bst.rInsert(17);
+bst.rInsert(15);
+bst.rInsert(18);
+bst.rInsert(22);
+bst.rInsert(21);
+bst.rInsert(24);
+bst.rInsert(33);
+bst.log("after inserting ...");
+
+bst.deleteNode(22);
+
+bst.log("after deleting 32");
 console.log("\nRoot: " + bst.root.value);
 console.log("\nRoot->Left: " + bst.root.left.value);
 console.log("\nRoot->Right: " + bst.root.right.value);
